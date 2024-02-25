@@ -1,6 +1,7 @@
 import Navbar from "./navbar/Navbar";
 import classes from './header.module.css'
 import MobileNavBar from "./mobileNavBar/MobileNavBar";
+import Link from "next/link";
 
 function Header(props) {
     const links =  [
@@ -11,7 +12,7 @@ function Header(props) {
     ]
     return ( 
         <div className={classes.container}>
-            <div className={classes.logo}>Logo</div>
+            <Link className={classes.logo} href='/'>Logo</Link>
             <div>
                 <Navbar className={classes.links}  links={links}/>
                 <MobileNavBar className={classes.mobileLinks} links={links}/>

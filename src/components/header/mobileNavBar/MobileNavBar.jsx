@@ -2,6 +2,7 @@
 import {useState} from 'react'
 import NavLink from '@/components/header/navbar/navLink/navLink';
 import classes from './mobileNavBar.module.css'
+import Image from 'next/image';
 
 export default function MobileNavBar({links, className}) {
 
@@ -14,8 +15,11 @@ export default function MobileNavBar({links, className}) {
         }
     };
     return (
+        
         <div className={className}>
-            <button className={classes.menuButton} onClick={()=>setOpen(!open)}>Menu</button>
+            <button className={classes.menuButton} onClick={()=>setOpen(!open)}>      
+            <Image src="/menu.png" alt="" width={30} height={30} />
+        </button>
             {
                 
                 open && <div className={classes.mobileLinks}> 
