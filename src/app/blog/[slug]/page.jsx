@@ -1,8 +1,16 @@
 import Image from "next/image";
 import classes from "./singlePost.module.css";
 
-const SinglePostPage = () => {
+const getData = async (slug) => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`,{ next:{revalidate:3600}})
+  if(!res.ok) throw new Error('Somefing went wrong')
+  return res.json()
+}
 
+
+const SinglePostPage = async ({params}) => {
+
+  const postData = await getData(params.slug)
 
   return (
     <div className={classes.container}>
@@ -10,7 +18,7 @@ const SinglePostPage = () => {
         <Image src='https://i.pinimg.com/originals/d0/fb/de/d0fbde1f87000927d7d70f910965060c.jpg' alr='' fill />
       </div>
       <div className={classes.textContainer}>
-        <h1 className={classes.title}>Title</h1>
+        <h1 className={classes.title}>{postData.title}</h1>
         <div className={classes.detail}>
           <Image className={classes.avatar} width={50} height={50} src='/avatar.jpg' alt="" />
           <div className={classes.detailText}>
@@ -23,7 +31,7 @@ const SinglePostPage = () => {
           </div>
         </div>
         <div className={classes.content}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum mollitia nobis cupiditate reiciendis nemo ut placeat necessitatibus totam itaque adipisci maxime magnam fuga, animi, deserunt corporis ad. Minima, nemo quos.
+          {postData.body}
         </div>
       </div>
     </div>
